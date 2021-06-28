@@ -7,7 +7,6 @@ import gregicadditions.capabilities.SimpleCapabilityManager;
 import gregicadditions.covers.CoverBehaviors;
 import gregicadditions.input.Keybinds;
 import gregicadditions.integrations.bees.ForestryCommonProxy;
-import gregicadditions.integrations.exnihilocreatio.ExNihiloCreatioProxy;
 import gregicadditions.integrations.mysticalagriculture.MysticalCommonProxy;
 import gregicadditions.integrations.opencomputers.OpenComputersCommonProxy;
 import gregicadditions.integrations.tconstruct.TinkersMaterials;
@@ -68,9 +67,6 @@ public class Gregicality {
     @SidedProxy(modId = MODID, clientSide = "gregicadditions.integrations.bees.ForestryClientProxy", serverSide = "gregicadditions.integrations.bees.ForestryCommonProxy")
     public static ForestryCommonProxy forestryProxy;
 
-    @SidedProxy(modId = MODID, clientSide = "gregicadditions.integrations.exnihilocreatio.ExNihiloCreatioProxy", serverSide = "gregicadditions.integrations.exnihilocreatio.ExNihiloCreatioProxy")
-    public static ExNihiloCreatioProxy exNihiloCreatioProxy;
-
     @SidedProxy(modId = MODID, clientSide = "gregicadditions.integrations.opencomputers.OpenComputersCommonProxy", serverSide = "gregicadditions.integrations.opencomputers.OpenComputersCommonProxy")
     public static OpenComputersCommonProxy openComputersProxy;
 
@@ -124,9 +120,6 @@ public class Gregicality {
         GATileEntities.init();
         if (GAConfig.GregsConstruct.EnableGregsConstruct && Loader.isModLoaded(GAValues.MODID_TCON))
             TinkersMaterials.preInit();
-        if (!GAConfig.exNihilo.Disable && Loader.isModLoaded(GAValues.MODID_EXNI)) {
-            exNihiloCreatioProxy.preInit();
-        }
         if (GAConfig.GTBees.EnableGTCEBees && Loader.isModLoaded(GAValues.MODID_FR)) {
             forestryProxy.preInit();
         }
@@ -142,9 +135,6 @@ public class Gregicality {
         proxy.registerReloadListener();
         if (GAConfig.GTBees.EnableGTCEBees && Loader.isModLoaded(GAValues.MODID_FR)) {
             forestryProxy.init();
-        }
-        if (!GAConfig.exNihilo.Disable && Loader.isModLoaded(GAValues.MODID_EXNI)) {
-            exNihiloCreatioProxy.init(event);
         }
         if (Loader.isModLoaded(MysticalAgradditions.MOD_ID) && !GAConfig.mysticalAgriculture.disable) {
             mysticalCommonProxy.init();

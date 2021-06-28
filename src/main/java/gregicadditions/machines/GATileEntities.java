@@ -243,6 +243,7 @@ public class GATileEntities {
     public static MetaTileEntityElectricImplosion ELECTRIC_IMPLOSION;
 
     public static TileEntitySteamMiner STEAM_MINER;
+    public static SteamRockBreaker STEAM_BREAKER;
 
     public static void init() {
 
@@ -1150,6 +1151,7 @@ public class GATileEntities {
         }
         ELECTRIC_IMPLOSION = GregTechAPI.registerMetaTileEntity(4211, new MetaTileEntityElectricImplosion(location("electric_implosion")));
         STEAM_MINER = GregTechAPI.registerMetaTileEntity(4212, new TileEntitySteamMiner(location("steam_miner")));
+        STEAM_BREAKER = GregTechAPI.registerMetaTileEntity(2767, new SteamRockBreaker(location("rock_breaker.steam")));
     }
 
     public static <T extends MetaTileEntity & ITieredMetaTileEntity> MTE<T> create(int id, T sampleMetaTileEntity) {
