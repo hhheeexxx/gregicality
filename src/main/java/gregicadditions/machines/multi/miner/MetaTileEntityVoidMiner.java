@@ -57,6 +57,7 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase {
     private static final MultiblockAbility<?>[] ALLOWED_ABILITIES = {MultiblockAbility.EXPORT_ITEMS, MultiblockAbility.IMPORT_FLUIDS, MultiblockAbility.INPUT_ENERGY};
     private final int maxTemperature;
     private static final int CONSUME_START = 100;
+    private static final int CONSUME_MAX = 18000;
     private final int tier;
     private IEnergyContainer energyContainer;
     private IMultipleTankHandler importFluidHandler;
@@ -152,12 +153,12 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase {
                 //consume fluid
                 if (usingPyrotheum && canDrainPyrotheum != null && canDrainPyrotheum.amount == (int) currentDrillingFluid) {
                     importFluidHandler.drain(pyrotheumFluid, true);
-                    temperature += currentDrillingFluid / 100;
+                    temperature += (int)(currentDrillingFluid / 100.0);
                     currentDrillingFluid = currentDrillingFluid * 1.02;
                     hasConsume = true;
                 } else if (temperature > 0 && canDrainCryotheum != null && canDrainCryotheum.amount == (int) currentDrillingFluid) {
                     importFluidHandler.drain(cryotheumFluid, true);
-                    temperature -= currentDrillingFluid / 100;
+                    temperature -= (int)(currentDrillingFluid / 100.0);
                     currentDrillingFluid = currentDrillingFluid * 0.98;
                 }
                 if (temperature < 0) {
@@ -165,6 +166,9 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase {
                 }
                 if (currentDrillingFluid < CONSUME_START) {
                     currentDrillingFluid = CONSUME_START;
+                }
+                if (currentDrillingFluid > CONSUME_MAX) {
+                    currentDrillingFluid = CONSUME_MAX;
                 }
                 if (temperature > maxTemperature) {
                     overheat = true;
